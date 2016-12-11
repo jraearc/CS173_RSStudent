@@ -44,7 +44,7 @@
 		</div>
 		<div id="loginfrm">
 		<p><b>Login to your account</b><br><br></p>
-		<?php if (isset($_GET["loginFailed"]) && isset($_GET["reason"])=="password") echo "Wrong username or password"; ?>
+		<?php if (isset($_GET["loginFailed"]) && isset($_GET["reason"])=="password") echo "<div id=\"errormsg\">Wrong username or password</div>"; ?>
 		<form action="" method="POST">
 			<p>
 				<label>Username<br><br></label>

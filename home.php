@@ -65,6 +65,7 @@
 		<div id="footer">
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>
+		<?php if(isset($_GET["action"]) == "logout") header("location: login.php"); ?>
 	</div>
 </body>
 
