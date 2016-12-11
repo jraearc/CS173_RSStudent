@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>UP RS | Student | Home</title>
+  <title>UP RS | Student | Grades</title>
   <link rel="stylesheet" type="text/css" href="pagestyles.css">
   <link rel="shortcut icon" href="uplogo.png">
 </head>
