@@ -16,7 +16,7 @@
 			</h1>
 		</div>
 		<div id="returnlogin">
-			<a href="main.php">Return to login page</a>
+			<a href="login.php">Return to login page</a>
 		</div>
 		<div id="userreg">
 			<p><b>Note: Account creation is subject to admin approval.</b></p>
@@ -42,10 +42,10 @@
 						<td>College:</td>
 						<td>
 						<select>
-							<option value="volvo">Engineering</option>
-							<option value="saab">Virata School of Business</option>
-							<option value="mercedes">Science</option>
-							<option value="audi">Economics</option>
+							<option value="engg">Engineering</option>
+							<option value="vsb">Virata School of Business</option>
+							<option value="science">Science</option>
+							<option value="econ">Economics</option>
 						</select>
 						</td>
 					</tr>

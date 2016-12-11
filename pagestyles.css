@@ -50,7 +50,7 @@ table {
 	margin: auto;
 }
 .announcements {
-	margin: auto;
+	margin-left: 20px;
 	column-width: auto;
 }
 .accountstatus {
@@ -169,6 +169,18 @@ table.accountstatus col:first-child{
 	font-size: 14px;
 	flex: 1 100%;
 	height: 100%;
+}
+#errormsg {
+	text-align: center;
+	color: black;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+	background: pink;
+	padding: 5px;
+	border: 1px solid;
+	border-color: red;
+	margin: 10px auto;
+	width: 20%;
 }
 #head {
 	margin: 25px auto;
