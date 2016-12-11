@@ -16,11 +16,10 @@
 			</h1>
 		</div>
 		<div id="userstat">
-			<hr>
-			<i>Logged in as user.</i> |
+			<i>Logged in as user.</i>
 			<a href="?action=logout">Log out</a>
-			<hr>
 		</div>
+		<div id="defaultpage">
 		<nav>
 			<div id="bar">
 			<ul>
@@ -36,6 +35,7 @@
 				<p><b>Grades</b></p>
 			</div>
 		</article>
+		</div>
 		<div id="footer">
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>

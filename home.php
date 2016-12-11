@@ -16,26 +16,52 @@
 			</h1>
 		</div>
 		<div id="userstat">
-			<hr>
-			<i>Logged in as user.</i> |
+			<i>Logged in as user.</i>
 			<a href="?action=logout">Log out</a>
-			<hr>
 		</div>
-		<nav>
-			<div id="bar">
-			<ul>
-				<li><b><a href="home.php">Home</a></b></li>
-				<li><a href="announcements.php">Announcements</a></li>
-				<li><a href="enlist.php">Enrollment</a></li>
-				<li><a href="grades.php">Grades</a></li>
-			</ul>
-			</div>
-		</nav>
-		<article>
-			<div id="homepage">
-				<p><b>Welcome user!</b></p>
-			</div>
-		</article>
+		<div id="defaultpage">
+			<nav>
+				<div id="bar">
+				<ul>
+					<li><b><a href="home.php">Home</a></b></li>
+					<li><a href="announcements.php">Announcements</a></li>
+					<li><a href="enlist.php">Enrollment</a></li>
+					<li><a href="grades.php">Grades</a></li>
+				</ul>
+				</div>
+			</nav>
+			<article>
+				<div id="homepage">
+					<p><b>Welcome user!</b></p>
+					<table class="accountstatus">
+						<tr>
+							<td>Student No.:</td>
+							<td>201600000</td>
+						</tr>
+						<tr>
+							<td>Registration Status:</td>
+							<td>Enrolled</td>
+						</tr>
+						<tr>
+							<td>Accountabilities:</td>
+							<td>None</td>
+						</tr>
+						<tr>
+							<td>ST Bracket:</td>
+							<td>No Discount</td>
+						</tr>
+						<tr>
+							<td>Scholarships:</td>
+							<td>None</td>
+						</tr>
+						<tr>
+							<td>Grade Notifications:</td>
+							<td>None</td>
+						</tr>
+					</table>
+				</div>
+			</article>
+		</div>
 		<div id="footer">
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>
