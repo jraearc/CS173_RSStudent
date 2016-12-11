@@ -38,6 +38,17 @@
 						<td>Surname:</td>
 						<td><input type="text" id="lastname" name="ureg" required></td>
 					</tr>
+					<tr>
+						<td>College:</td>
+						<td>
+						<select>
+							<option value="volvo">Engineering</option>
+							<option value="saab">Virata School of Business</option>
+							<option value="mercedes">Science</option>
+							<option value="audi">Economics</option>
+						</select>
+						</td>
+					</tr>
 				</table>
 			</form>
 		</div>
