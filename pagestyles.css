@@ -1,0 +1,115 @@
+body {
+    background-color: #eee;
+}
+h1 {
+    color: black;
+    font-family: serif;
+    font-size: 20px;
+}
+p {
+    color: white;
+}
+nav {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+    color: white;
+}
+article {
+    margin-left: 150px;
+    padding: 0;
+    overflow: hidden;
+}
+#wrapper {
+	min-height: 100%;
+	position: relative;
+}
+#userstat {
+	text-align: right;
+	color: black;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+}
+#loginfrm {
+	text-align: center;
+	border: solid maroon 1px;
+	width: 20%;
+	border-radius: 7px;
+	margin: 10px auto;
+	background: maroon;
+	padding: 20px;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+}
+#user {
+	width: 75%;
+	text-align: center;
+}
+#pass {
+	width: 75%;
+	text-align: center;
+}
+#clickbtn {
+	width: 40%;
+	color: white;
+	background: green;
+	padding: 5px;
+	border: 2px solid;
+	border-radius: 25px;
+}
+#createacct {
+	text-align: center;
+	color: black;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+}
+#homepage {
+	border-radius: 0px 6px 6px 0px;
+    background: green;
+    padding: 20px; 
+    width: auto;
+    height: 150px;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+}
+#bar {
+	border-radius: 6px 0px 0px 6px;
+    background: maroon;
+    padding: 20px; 
+    width: 120px;
+    height: 150px;
+    line-height: 25px;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+}
+#head {
+	margin: 50px auto;
+	text-align: center;
+	color: black;
+	height: 125px;
+}
+#head2 {
+	margin: 20px auto;
+	text-align: center;
+	color: black;
+	height: 125px;
+}
+#footer {
+	margin: 20px auto;
+	text-align: center;
+	color: grey;
+	font-family: serif;
+	font-size: 11px;
+	height: 5px;
+	padding: 15px;
+}
