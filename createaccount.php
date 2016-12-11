@@ -15,27 +15,32 @@
 				<br>Student Portal
 			</h1>
 		</div>
-		<div id="userstat">
-			<hr>
-			<i>Logged in as user.</i> |
-			<a href="?action=logout">Log out</a>
-			<hr>
+		<div id="returnlogin">
+			<a href="main.php">Return to login page</a>
 		</div>
-		<nav>
-			<div id="bar">
-			<ul>
-				<li><b><a href="home.php">Home</a></b></li>
-				<li><a href="announcements.php">Announcements</a></li>
-				<li><a href="enlist.php">Enrollment</a></li>
-				<li><a href="grades.php">Grades</a></li>
-			</ul>
-			</div>
-		</nav>
-		<article>
-			<div id="homepage">
-				<p><b>Welcome user!</b></p>
-			</div>
-		</article>
+		<div id="userreg">
+			<p><b>Note: Account creation is subject to admin approval.</b></p>
+			<form action="createaccount.php" method="POST">
+				<table class="accountcreation">
+					<tr>
+						<td>Username:</td>
+						<td><input type="text" id="ureg" name="ureg" required></td>
+						<td>Student No.:</td>
+						<td><input type="text" id="ureg" name="ureg" required></td>
+						<td>Course:</td>
+						<td><input type="text" id="ureg" name="ureg" required></td>
+					</tr>
+					<tr>
+						<td>First Name:</td>
+						<td><input type="text" id="firstname" name="ureg" required></td>
+						<td>Middle Name:</td>
+						<td><input type="text" id="midname" name="ureg" required></td>
+						<td>Surname:</td>
+						<td><input type="text" id="lastname" name="ureg" required></td>
+					</tr>
+				</table>
+			</form>
+		</div>
 		<div id="footer">
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>

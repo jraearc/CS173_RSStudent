@@ -15,7 +15,20 @@ nav {
     margin: 0;
     padding: 0;
 }
-
+a:link {
+    color: white;
+    text-decoration: none;
+}
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: hotpink;
+}
+a:active {
+    color: blue;
+}
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -30,6 +43,11 @@ article {
     padding: 0;
     overflow: hidden;
 }
+table {
+	color: white;
+	margin: 30px auto;
+    width: 80%;
+}
 #wrapper {
 	min-height: 100%;
 	position: relative;
@@ -39,6 +57,17 @@ article {
 	color: black;
 	font-family: Helvetica, Arial;
 	font-size: 12px;
+}
+#returnlogin {
+	text-align: center;
+	color: white;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+	background: maroon;
+	padding: 5px;
+	border-radius: 25px;
+	margin: 10px auto;
+	width: 20%;
 }
 #loginfrm {
 	text-align: center;
@@ -72,6 +101,11 @@ article {
 	color: black;
 	font-family: Helvetica, Arial;
 	font-size: 14px;
+	background: green;
+	padding: 5px;
+	border-radius: 7px;
+	margin: 10px auto;
+	width: 20%;
 }
 #homepage {
 	border-radius: 0px 6px 6px 0px;
@@ -79,6 +113,18 @@ article {
     padding: 20px; 
     width: auto;
     height: 150px;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+}
+#userreg {
+	margin: auto;
+	text-align: center;
+	position: center;
+	border-radius: 6px 6px 6px 6px;
+    background: green;
+    padding: 20px; 
+    width: 75%;
+    height: auto;
 	font-family: Helvetica, Arial;
 	font-size: 14px;
 }
