@@ -1,3 +1,36 @@
+<?php
+	ini_set('display_errors',1);
+	error_reporting(E_ALL);
+	session_start();
+
+	$db = mysqli_connect("localhost", "root", "cs173ggez", "student_is");
+
+	if(!isset($_SESSION["userlogin"])) {
+		header("location: login.php");
+	}
+	else {
+		$current_user = $_SESSION["userlogin"];
+	}
+
+	$sql = "SELECT * FROM user_info WHERE username = '$current_user'";
+	$result = mysqli_query($db,$sql);
+	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+	$firstname = $row['firstname'];
+	$middlename = $row['middlename'];
+	$lastname = $row['lastname'];
+	$studentnumber = $row['studentnumber'];
+	$bracket = $row['bracket'];
+	$degreeprog = $row['degreeprog'];
+	$college = $row['college'];
+	$is_student = $row['is_student'];
+	$is_enrolled = $row['is_enrolled'];
+
+	mysqli_free_result($result);
+	mysqli_close($db);
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +49,7 @@
 			</h1>
 		</div>
 		<div id="userstat">
-			<i>Logged in as user.</i>
+			<?php echo "<i>Logged in as $current_user.</i>"?>
 			<a href="?action=logout">Log out</a>
 		</div>
 		<div id="defaultpage">
@@ -32,30 +65,37 @@
 			</nav>
 			<article>
 				<div id="homepage">
-					<p><b>Welcome user!</b></p>
+					<?php echo "<p><b>Welcome $firstname $middlename $lastname!</b></p>"; ?>
 					<table class="accountstatus">
 						<tr>
-							<td>Student No.:</td>
-							<td>201600000</td>
+							<th>Student No.:</th>
+							<?php echo "<td>$studentnumber</td>" ?>
 						</tr>
 						<tr>
-							<td>Registration Status:</td>
-							<td>Enrolled</td>
+							<th>Registration Status:</th>
+							<?php
+							if($is_student == 1) echo "<td>Enrolled</td>";
+							else echo "<td>Not Enrolled</td>"; ?>
 						</tr>
 						<tr>
-							<td>Accountabilities:</td>
+							<th>Accountabilities:</th>
 							<td>None</td>
 						</tr>
 						<tr>
-							<td>ST Bracket:</td>
-							<td>No Discount</td>
+							<th>ST Bracket:</th>
+							<?php
+							if(!strcmp($bracket,"A")) echo "<td>No Discount</td>";
+							else if(!strcmp($bracket, "B")) echo "<td>Partial Discount - 33%</td>";
+							else if(!strcmp($bracket, "C")) echo "<td>Partial Discount - 60%</td>";
+							else if(!strcmp($bracket, "D")) echo "<td>Partial Discount - 80%</td>";
+							else if(!strcmp($bracket, "E")) echo "<td>Full Discount</td>"; ?>
 						</tr>
 						<tr>
-							<td>Scholarships:</td>
+							<th>Scholarships:</th>
 							<td>None</td>
 						</tr>
 						<tr>
-							<td>Grade Notifications:</td>
+							<th>Grade Notifications:</th>
 							<td>None</td>
 						</tr>
 					</table>
@@ -65,7 +105,13 @@
 		<div id="footer">
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>
-		<?php if(isset($_GET["action"]) == "logout") header("location: login.php"); ?>
+		<?php 
+		if(isset($_GET["action"]) == "logout") {
+			session_unset();
+			session_destroy();
+			header("location: login.php");
+		}
+		?>
 	</div>
 </body>
 

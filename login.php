@@ -17,6 +17,7 @@
 		$count = mysqli_num_rows($result);
 
 		if($count == 1) {
+			$_SESSION["userlogin"] = $username;
 			header("location: home.php");
 		}
 		else {

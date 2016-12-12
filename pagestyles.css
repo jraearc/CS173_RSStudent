@@ -49,18 +49,63 @@ table {
 .accountcreation {
 	margin: auto;
 }
-.announcements {
+table.accountstatus {
+	border-collapse: collapse;
+	width: 820px;
+}
+table.accountstatus tr:nth-child(even){
+	background-color: grey;
+	color: black;
+}
+table.accountstatus tr:nth-child(odd){
+	background-color: lightgrey;
+	color: black;
+}
+table.accountstatus th {
+	text-align: left;
+	width: 200px;
+}
+table.accountstatus td {
+	text-align: left;
+	width: 600px;
+}
+table.announcements {
+	border-collapse: collapse;
 	margin-left: 20px;
-	column-width: auto;
+	width: 800px;
+	margin: 10px;
 }
-.accountstatus {
-
+table.announcements td {
+	background-color: lightgrey;
+	color: black;
+	text-align: left;
+	padding: 10px;
 }
-table.accountstatus col:first-child{
-	column-width: 20px;
+table.announcements th {
+	background-color: maroon;
+	color: white;
+	text-align: left;
+	padding: 10px;
 }
-table.accountstatus col:first-child{
-	column-width: auto;
+table.schedule {
+	border-collapse: collapse;
+	width: 820px;
+}
+table.schedule th {
+	background-color: grey;
+	color: black;
+	border: 1px solid;
+	border-color: grey;
+	text-align: center;
+	width: 500px;
+}
+table.schedule td {
+	background-color: lightgrey;
+	color: black;
+	border: 1px solid;
+	border-color: grey;
+	text-align: center;
+	width: 600px;
 }
 #wrapper {
 	min-height: 100%;

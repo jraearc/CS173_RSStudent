@@ -1,3 +1,19 @@
+<?php
+	ini_set('display_errors',1);
+	error_reporting(E_ALL);
+	session_start();
+
+	$db = mysqli_connect("localhost", "root", "cs173ggez", "student_is");
+
+	if(!isset($_SESSION["userlogin"])) {
+		header("location: login.php");
+	}
+	else {
+		$current_user = $_SESSION["userlogin"];
+	}
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +32,7 @@
 			</h1>
 		</div>
 		<div id="userstat">
-			<i>Logged in as user.</i>
+			<?php echo "<i>Logged in as $current_user.</i>"?>
 			<a href="?action=logout">Log out</a>
 		</div>
 		<div id="defaultpage">
@@ -39,7 +55,14 @@
 		<div id="footer">
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>
-	</div>
+		<?php 
+		if(isset($_GET["action"]) == "logout") {
+			session_unset();
+			session_destroy();
+			header("location: login.php");
+		}
+		?>
+		</div>
 </body>
 
 </html>
