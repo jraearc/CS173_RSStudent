@@ -38,11 +38,18 @@
 		}
 	}
 
+	$underload = false;
+
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(isset($_POST['finalize'])) {
-			$sql = "UPDATE user_info SET is_enrolled = 1 WHERE id = $curr_user_id";
-			mysqli_query($db, $sql);
-			header("location: enlist.php");
+			if($_SESSION['totalunits'] >= 15) {
+				$sql = "UPDATE user_info SET is_enrolled = 1 WHERE id = $curr_user_id";
+				mysqli_query($db, $sql);
+				header("location: enlist.php");
+			}
+			else {
+				$underload = true;
+			}
 		}
 		else if(isset($_POST['searchcourse'])) {
 			$searchstring = $_POST['coursename'];
@@ -97,6 +104,12 @@
 					</tr>
 					<?php
 
+					if($_SERVER["REQUEST_METHOD"] == "POST") {
+						if($underload) {
+							echo "<div id=\"errormsg\">Underload, please check number of units</div>";
+						}
+				    }
+
 					if(isset($_GET['action'])) {
 						if(!strcmp($_GET['action'], "enlist")) {
 							if(isset($_GET['courseid'])) {
@@ -104,9 +117,22 @@
 								$conquery = "SELECT * FROM course_schedules WHERE course_id = $cid";
 								$conres = mysqli_query($db, $conquery);
 
+								$excessquery = "SELECT * FROM courses WHERE id = $cid";
+								$exres = mysqli_query($db, $excessquery);
+								$exrow = mysqli_fetch_array($exres, MYSQLI_ASSOC);
+
+								$is_overload = false;
+
+								if(isset($_SESSION['totalunits'])) {
+									if($exrow['units'] + $_SESSION['totalunits'] > 21) {
+										$is_overload = true;
+										echo "<div id=\"errormsg\">Overload, please check number of units</div>";
+									}
+								}
 								$is_conflict = FALSE;
 
 								while($conrow = mysqli_fetch_array($conres, MYSQLI_ASSOC)) {
+									if($is_overload) break;
 									$testday = $conrow['day_of_week'];
 									$teststart = $conrow['schedule_start'];
 									$testend = $conrow['schedule_end'];
@@ -138,7 +164,7 @@
 								if($is_conflict) {
 									echo "<div id=\"errormsg\">Conflict with current schedule, please check your list</div>";
 								}
-								else {
+								else if(!$is_overload) {
 									$insert_query = "INSERT INTO enlistment (courseid, uid, approved) VALUES ($cid, $curr_user_id, 0)";
 									if(mysqli_query($db, $insert_query)) {
 										echo "<div id=\"successmsg\">Subject successfully enlisted</div>";
@@ -254,6 +280,8 @@
 							}
 						}
 					}
+						
+					$_SESSION['totalunits'] = $myunits;
 					?>
 				</table>
 				<hr>
