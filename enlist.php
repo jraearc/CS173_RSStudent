@@ -3,16 +3,6 @@
 	error_reporting(E_ALL);
 	session_start();
 
-	if(isset($_GET["action"])) {
-		if(!strcmp($_GET["action"],"logout")) {
-			session_unset();
-			session_destroy();
-			header("location: login.php");
-		}
-	}
-
-	$db = mysqli_connect("localhost", "root", "cs173ggez", "student_is");
-
 	if(!isset($_SESSION["userlogin"])) {
 		header("location: login.php");
 	}
@@ -20,11 +10,7 @@
 		$current_user = $_SESSION["userlogin"];
 	}
 
-	if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-		$searchstring = $_POST['coursename'];
-
-    }
+	$db = mysqli_connect("localhost", "root", "cs173ggez", "student_is");
 
 	$sql = "SELECT * FROM user_info WHERE username = '$current_user'";
 
@@ -32,11 +18,36 @@
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
 	$curr_user_id = $row['id'];
+	$finalized = $row['is_enrolled'];
 
 	mysqli_free_result($result);
 
-	$sql = "SELECT * FROM enlistment WHERE uid = $curr_user_id";
-	$result = mysqli_query($db,$sql);
+	if(isset($_GET["action"])) {
+		if(!strcmp($_GET["action"],"logout")) {
+			session_unset();
+			session_destroy();
+			header("location: login.php");
+		}
+		else if(!strcmp($_GET["action"],"deletefromlist")) {
+			if(isset($_GET['courseid'])) {
+				$coid = $_GET['courseid'];
+				$sql = "DELETE FROM enlistment WHERE courseid = $coid AND uid = $curr_user_id";
+				mysqli_query($db, $sql);
+				header("location: enlist.php");
+			}
+		}
+	}
+
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		if(isset($_POST['finalize'])) {
+			$sql = "UPDATE user_info SET is_enrolled = 1 WHERE id = $curr_user_id";
+			mysqli_query($db, $sql);
+			header("location: enlist.php");
+		}
+		else if(isset($_POST['searchcourse'])) {
+			$searchstring = $_POST['coursename'];
+		}
+    }
 ?>
 
 
@@ -77,7 +88,7 @@
 				<p><b>Enrollment</b></p>
 				<hr>
 				<p>Enlisted Courses</p>
-				<table class="schedule">
+				<table class="enlistedcourses">
 					<tr>
 						<th>Course Name</th>
 						<th>Room</th>
@@ -86,12 +97,14 @@
 					</tr>
 					<?php
 
-/*					if(isset($_GET['action'])) {
+					if(isset($_GET['action'])) {
 						if(!strcmp($_GET['action'], "enlist")) {
 							if(isset($_GET['courseid'])) {
 								$cid = $_GET['courseid'];
 								$conquery = "SELECT * FROM course_schedules WHERE course_id = $cid";
 								$conres = mysqli_query($db, $conquery);
+
+								$is_conflict = FALSE;
 
 								while($conrow = mysqli_fetch_array($conres, MYSQLI_ASSOC)) {
 									$testday = $conrow['day_of_week'];
@@ -99,18 +112,47 @@
 									$testend = $conrow['schedule_end'];
 									$enlistquery = "SELECT * FROM enlistment WHERE uid = $curr_user_id";
 									$enlistres = mysqli_query($db, $enlistquery);
-									while($enrow = mysqli_fetch_array($enlistres, MYSQLI_ASSOC))) {
-										$currcid = $enrow['course_id'];
+									while($enrow = mysqli_fetch_array($enlistres, MYSQLI_ASSOC)) {
+										$currcid = $enrow['courseid'];
 										$schedquery = "SELECT * FROM course_schedules WHERE course_id = $currcid";
 										$schedres = mysqli_query($db, $schedquery);
 										while($schedrow = mysqli_fetch_array($schedres, MYSQLI_ASSOC)) {
-
+											$currschedday = $schedrow['day_of_week'];
+											$currschedstart = $schedrow['schedule_start'];
+											$currschedend =  $schedrow['schedule_end'];
+											$startT = strtotime($currschedstart);
+											$endT = strtotime($currschedend);
+											$teststartT = strtotime($teststart);
+											$testendT = strtotime($testend);
+											if(!strcmp($testday,$currschedday)) {
+												if($teststartT >= $startT and $testendT <= $endT)
+													$is_conflict = TRUE;
+													break;
+											}
+											if($is_conflict) break;
 										}
+										if($is_conflict) break;
+									}
+									if($is_conflict) break;
+								}
+								if($is_conflict) {
+									echo "<div id=\"errormsg\">Conflict with current schedule, please check your list</div>";
+								}
+								else {
+									$insert_query = "INSERT INTO enlistment (courseid, uid, approved) VALUES ($cid, $curr_user_id, 0)";
+									if(mysqli_query($db, $insert_query)) {
+										echo "<div id=\"successmsg\">Subject successfully enlisted</div>";
+									}
+									else {
+										echo "<div id=\"errormsg\">Database error</div>";
 									}
 								}
 							}
 						}
-					}*/
+					}
+
+					$sql = "SELECT * FROM enlistment WHERE uid = $curr_user_id";
+					$result = mysqli_query($db,$sql);
 
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 						echo "<tr>";
@@ -137,7 +179,9 @@
 						}
 						echo "</td>";
 						if($approved) echo "<td>Yes</td>";
-						else echo "<td>No | <a href=\"?action=deletefromlist&courseid=$courseid\">Delete</a></td>";
+						else echo "<td>No";
+						if($finalized) echo "</td>";
+						else echo " | <a href=\"?action=deletefromlist&courseid=$courseid\">Delete</a></td>";
 						echo "</tr>";
 					}
 					if(mysqli_num_rows($result) == 0) echo "<tr><td colspan=4>No courses enlisted</td></tr>";
@@ -146,6 +190,9 @@
 						$result = mysqli_query($db,$sql);
 
 						$schedarr = array();
+
+						$colors = array('indianred', 'lightseagreen', 'olivedrab', 'lightblue', 'lightslategray');
+						$cl = 0;
 
 						while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 							$courseid = $row['courseid'];
@@ -181,13 +228,15 @@
 								$hr2 = 730;							
 								for($i = 0; $i < 28; $i++) {
 									if($hr1 >= $inttstart and $hr2 <= $inttend) 
-										$schedarr[$i][$iday] = "<td>" . $title . "</td>";
+										$schedarr[$i][$iday] = "<td style=\"background-color: $colors[$cl]; color: black; border-color: $colors[$cl]\"><b>" . $title . "</b></td>";
 									$hr1 = $hr1 + 30;
 									if($hr1 % 100 == 60) $hr1 = $hr1 + 40;
 									$hr2 = $hr2 + 30;
 									if($hr2 % 100 == 60) $hr2 = $hr2 + 40;
 								}
 							}
+							$cl++;
+							if($cl == 4) $cl = 0;
 							for($i = 0; $i < 28; $i++) {
 								for($j = 0; $j < 7; $j++) {
 									if(!isset($schedarr[$i][$j])) $schedarr[$i][$j] = "<td></td>";
@@ -443,19 +492,21 @@
 						</tr>
 					</table>
 					<hr>
-					<p>Search for courses</p>
-					<form action="" method="POST">
-					<table class="enlistcourse">
-						<tr>
-							<th>Enter course name:</th>
-							<td><input type="text" id="coursename" name="coursename" required></td>
-							<td><input type="submit" id="searchcourse" value="Search"></td>
-						</tr>
-					</table>
-					</form>
 					<?php
-
-
+					if($finalized) echo "<div id=\"successmsg\">Finalized</div>";
+					else {
+						echo "<p>Search for courses</p>";
+						echo "<form action=\"\" method=\"POST\">";
+						echo "<table class=\"enlistcourse\">";
+						echo "<tr>";
+						echo "<th>Enter course name:</th>";
+						echo "<td><input type=\"text\" id=\"coursename\" name=\"coursename\" required></td>";
+						echo "<td><input type=\"submit\" id=\"searchcourse\" name=\"searchcourse\" value=\"Search\"></td>";
+						echo "</tr>";
+						echo "</table>";
+						echo "</form>";
+					}
+					
 					if(isset($searchstring)) {
 						$sqls = "SELECT * FROM courses WHERE title LIKE '%$searchstring%'";
 
@@ -487,6 +538,13 @@
 						}
 						if(mysqli_num_rows($sresult) == 0) echo "<tr><td colspan=4><i>No results</i></td></tr>";
 						echo "</table>";
+					}
+
+					if($finalized);
+					else {
+						echo "<form action=\"\" method=\"POST\">";
+						echo "<p><input type=\"submit\" id=\"finalize\" name=\"finalize\" value=\"Finalize enrollment\"></p>";
+						echo "</form>";
 					}
 					?>
 			</div>

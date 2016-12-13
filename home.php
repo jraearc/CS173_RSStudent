@@ -82,7 +82,9 @@
 						<tr>
 							<th>Registration Status:</th>
 							<?php
-							if($is_enrolled == 1) echo "<td>Enrolled</td>";
+							if($is_enrolled == 1) echo "<td>Finalized</td>";
+							else if($is_enrolled == 2) echo "<td>Assessed</td>";
+							else if($is_enrolled == 3) echo "<td>Enrolled</td>";
 							else echo "<td>Not Enrolled</td>"; ?>
 						</tr>
 						<tr>

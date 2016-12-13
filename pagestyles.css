@@ -58,12 +58,15 @@ table a:visited {
     text-decoration: none;
 }
 table a:hover {
-    color: hotpink;
+    color: maroon;
 }
 table a:active {
     color: blue;
 }
 table.accountstatus {
+	border: 3px solid;
+	border-color: maroon;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-collapse: collapse;
 	width: 860px;
 }
@@ -83,7 +86,31 @@ table.accountstatus td {
 	text-align: left;
 	width: 600px;
 }
+table.displaygrades {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-collapse: collapse;
+	width: 860px;
+}
+table.displaygrades tr:nth-child(odd){
+	background-color: grey;
+	color: black;
+}
+table.displaygrades tr:nth-child(even){
+	background-color: lightgrey;
+	color: black;
+}
+table.displaygrades th {
+	text-align: center;
+	width: 200px;
+	background-color: maroon;
+	color: white;
+}
+table.displaygrades td {
+	text-align: center;
+	width: 600px;
+}
 table.announcements {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-collapse: collapse;
 	margin-left: 20px;
 	width: 840px;
@@ -101,24 +128,52 @@ table.announcements th {
 	text-align: left;
 	padding: 10px;
 }
+table.enlistedcourses {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-collapse: collapse;
+	width: 860px;
+}
+table.enlistedcourses tr:nth-child(odd){
+	background-color: grey;
+	color: black;
+}
+table.enlistedcourses tr:nth-child(even){
+	background-color: lightgrey;
+	color: black;
+}
+table.enlistedcourses th {
+	background-color: maroon;
+	color: white;
+	text-align: center;
+	font-size: 14px;
+	width: 680px;
+}
+table.enlistedcourses td {
+	color: black;
+	text-align: center;
+	font-size: 14px;
+	width: 50px;
+}
+table.enlistedcourses tr:hover {
+	background-color: linen;
+}
 table.schedule {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-collapse: collapse;
 	width: 860px;
 }
 table.schedule th {
-	background-color: grey;
-	color: black;
-	border: 1px solid;
-	border-color: grey;
+	background-color: maroon;
+	color: white;
 	text-align: center;
 	font-size: 11px;
 	width: 680px;
 }
 table.schedule td {
+	border-bottom: 1px solid;
+	border-color: grey;
 	background-color: lightgrey;
 	color: black;
-	border: 1px solid;
-	border-color: grey;
 	text-align: center;
 	font-size: 11px;
 	width: 50px;
@@ -136,27 +191,35 @@ table.enlistcourse td {
 	font-size: 11px;
 }
 table.searchres {
+	margin-top: 8px;
+	height: 18%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-collapse: collapse;
 	width: 860px;
-	margin-top: 10px;
 }
-table.searchres th {
+table.searchres tr:nth-child(odd){
 	background-color: grey;
 	color: black;
-	border: 1px solid;
-	border-color: grey;
+}
+table.searchres tr:nth-child(even){
+	background-color: lightgrey;
+	color: black;
+}
+table.searchres th {
+	background-color: maroon;
+	color: white;
 	text-align: center;
 	font-size: 14px;
 	width: 680px;
 }
 table.searchres td {
-	background-color: lightgrey;
 	color: black;
-	border: 1px solid;
-	border-color: grey;
 	text-align: center;
 	font-size: 14px;
 	width: 50px;
+}
+table.searchres tr:hover {
+	background-color: linen;
 }
 #wrapper {
 	min-height: 100%;
@@ -222,6 +285,13 @@ table.searchres td {
 	border: 2px solid;
 	border-radius: 25px;
 	position: center;
+}
+#finalize {
+	width: 100%;
+	color: white;
+	background: maroon;
+	border: 2px solid;
+	border-radius: 25px;
 }
 #createacct {
 	text-align: center;
@@ -295,10 +365,10 @@ table.searchres td {
 	color: white;
 	font-family: Helvetica, Arial;
 	font-size: 14px;
-	background: green;
+	background: lightgreen;
 	padding: 5px;
 	border: 1px solid;
-	border-color: red;
+	border-color: white;
 	margin: 10px auto;
 	width: 75%;
 }

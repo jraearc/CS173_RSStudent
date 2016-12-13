@@ -11,6 +11,17 @@
 	else {
 		$current_user = $_SESSION["userlogin"];
 	}
+
+	$sql = "SELECT * FROM users WHERE username = '$current_user'";
+	$result = mysqli_query($db,$sql);
+
+	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+	$uid = $row['id'];
+
+	$sql = "SELECT * FROM grades WHERE studentid = $uid";
+
+	$result = mysqli_query($db,$sql);
 ?>
 
 
@@ -49,6 +60,43 @@
 		<article>
 			<div id="homepage">
 				<p><b>Grades</b></p>
+					<table class="displaygrades">
+						<tr><th>Course Name</th>
+						<th>Instructor</th>
+						<th>Units</th>
+						<th>Grade</th>
+						</tr>
+						<?php
+						if(mysqli_num_rows($result) == 0) echo "<tr><td colspan=4><i>No grades in record</i></td></tr>";
+						while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+							$coid = $row['courseid'];
+							$getquery = "SELECT * FROM courses WHERE id = $coid";
+							$cres = mysqli_query($db, $getquery);
+							$carr = mysqli_fetch_array($cres,MYSQLI_ASSOC);
+							echo "<tr>";
+							$title = $carr['title'];
+							$units = $carr['units'];
+							$grade = $row['grade'];
+							echo "<td>$title</td>";
+							$iid = $row['instructorid'];
+							$getquery = "SELECT * FROM faculty WHERE id = $iid";
+							$cres = mysqli_query($db, $getquery);
+							$carr = mysqli_fetch_array($cres,MYSQLI_ASSOC);
+							$iidusers = $carr['uid'];
+							$getquery = "SELECT * FROM user_info WHERE id = $iidusers";
+							$cres = mysqli_query($db, $getquery);
+							$carr = mysqli_fetch_array($cres,MYSQLI_ASSOC);
+							$lname = $carr['lastname'];
+							$fname = $carr['firstname'];
+							echo "<td>$lname, $fname</td>";
+							printf("<td>%.1f</td>", $units);
+							printf("<td>%.2f</td>", $grade);
+							echo "</tr>";
+						}
+						mysqli_free_result($result);
+						mysqli_close($db);
+						?>
+					</table>
 			</div>
 		</article>
 		</div>

@@ -54,6 +54,7 @@
 				<p><b>Announcements</b></p>
 					<table class="announcements">
 					<?php
+					if(mysqli_num_rows($result) == 0) echo "<tr><th><i>No announcements</i></th></tr>";
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 						$title = $row['title'];
 						echo "<tr><th>$title</th></tr>";
