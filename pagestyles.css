@@ -42,12 +42,17 @@ article {
     margin-left: 0px;
     padding: 0;
 }
+input {
+	width: 100%;
+}
 table {
 	color: white;
     width: 80%;
 }
-.accountcreation {
+table.accountcreation {
 	margin: auto;
+	width: 1000px;
+
 }
 table a:link {
     color: blue;
@@ -87,6 +92,7 @@ table.accountstatus td {
 	width: 600px;
 }
 table.displaygrades {
+	margin-top: 8px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-collapse: collapse;
 	width: 860px;
@@ -182,17 +188,16 @@ table.enlistcourse {
 	width: 860px;
 }
 table.enlistcourse th {
-	text-align: left;
-	font-size: 11px;
+	text-align: center;
+	font-size: 13px;
 	width: 120px;
 }
 table.enlistcourse td {
 	text-align: center;
-	font-size: 11px;
+	font-size: 13px;
 }
 table.searchres {
 	margin-top: 8px;
-	height: 18%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-collapse: collapse;
 	width: 860px;
@@ -220,6 +225,15 @@ table.searchres td {
 }
 table.searchres tr:hover {
 	background-color: linen;
+}
+select.semester {
+	width: 100%;
+}
+select.year {
+	width: 80%;
+}
+select.college {
+	width: 100%;
 }
 #wrapper {
 	min-height: 100%;
@@ -283,6 +297,24 @@ table.searchres tr:hover {
 	color: white;
 	background: maroon;
 	border: 2px solid;
+	border-radius: 25px;
+	position: center;
+}
+#getgrades {
+	width: 100%;
+	color: white;
+	background: maroon;
+	border: 2px solid;
+	border-radius: 25px;
+	position: center;
+}
+#submitaccount {
+	width: 35%;
+	color: black;
+	background: lightgreen;
+	padding: 5px;
+	border: 2px solid;
+	border-color: white;
 	border-radius: 25px;
 	position: center;
 }
@@ -362,7 +394,7 @@ table.searchres tr:hover {
 }
 #successmsg {
 	text-align: center;
-	color: white;
+	color: black;
 	font-family: Helvetica, Arial;
 	font-size: 14px;
 	background: lightgreen;

@@ -154,6 +154,8 @@
 					$sql = "SELECT * FROM enlistment WHERE uid = $curr_user_id";
 					$result = mysqli_query($db,$sql);
 
+					$myunits = 0;
+
 					while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 						echo "<tr>";
 						$courseid = $row['courseid'];
@@ -163,6 +165,7 @@
 						$title = $row2['title'];
 						$room = $row2['room'];
 						$approved = $row['approved'];
+						$myunits += $row2['units'];
 						echo "<td>$title</td>";
 						echo "<td>$room</td>";
 						$sql3 = "SELECT * FROM course_schedules WHERE course_id = $courseid";
@@ -255,6 +258,7 @@
 				</table>
 				<hr>
 				<p>My Schedule</p>
+				<?php printf("<p style=\"text-align: right\"><b>No. of units: %.1f</b></p>", $myunits); ?>
 				<table class="schedule">
 						<tr>
 							<th>Time</th>

@@ -16,12 +16,29 @@
 
 		$count = mysqli_num_rows($result);
 
-		if($count == 1) {
-			$_SESSION["userlogin"] = $username;
-			header("location: home.php");
+		$sql = "SELECT * FROM user_info WHERE username = '$username'";
+		$result = mysqli_query($db,$sql);
+		$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+		$is_approved = 0;
+
+		if(isset($row['approved'])) {
+			if($row['approved']) {
+				$is_approved = 1;
+			}
+		}
+
+		if($is_approved) {
+			if($count == 1) {
+				$_SESSION["userlogin"] = $username;
+				header("location: home.php");
+			}
+		}
+		else if($count == 0) {
+			die(header("location:login.php?loginFailed=true&reason=password"));
 		}
 		else {
-			die(header("location:login.php?loginFailed=true&reason=password"));
+			die(header("location:login.php?loginFailed=true&reason=notapproved"));
 		}
     }
 
@@ -45,7 +62,12 @@
 		</div>
 		<div id="loginfrm">
 		<p><b>Login to your account</b><br><br></p>
-		<?php if (isset($_GET["loginFailed"]) && isset($_GET["reason"])=="password") echo "<div id=\"errormsg\">Wrong username or password</div>"; ?>
+		<?php
+		if (isset($_GET["loginFailed"]) && isset($_GET["reason"])) {
+			if($_GET["reason"] == "password") echo "<div id=\"errormsg\">Wrong username or password</div>";
+			else if($_GET["reason"] == "notapproved") echo "<div id=\"successmsg\">Account pending approval, please contact OUR</div>";
+		}
+		?>
 		<form action="" method="POST">
 			<p>
 				<label>Username<br><br></label>
