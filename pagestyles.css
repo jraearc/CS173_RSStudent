@@ -49,9 +49,23 @@ table {
 .accountcreation {
 	margin: auto;
 }
+table a:link {
+    color: blue;
+    text-decoration: none;
+}
+table a:visited {
+    color: red;
+    text-decoration: none;
+}
+table a:hover {
+    color: hotpink;
+}
+table a:active {
+    color: blue;
+}
 table.accountstatus {
 	border-collapse: collapse;
-	width: 820px;
+	width: 860px;
 }
 table.accountstatus tr:nth-child(even){
 	background-color: grey;
@@ -72,7 +86,7 @@ table.accountstatus td {
 table.announcements {
 	border-collapse: collapse;
 	margin-left: 20px;
-	width: 800px;
+	width: 840px;
 	margin: 10px;
 }
 table.announcements td {
@@ -89,7 +103,7 @@ table.announcements th {
 }
 table.schedule {
 	border-collapse: collapse;
-	width: 820px;
+	width: 860px;
 }
 table.schedule th {
 	background-color: grey;
@@ -97,7 +111,8 @@ table.schedule th {
 	border: 1px solid;
 	border-color: grey;
 	text-align: center;
-	width: 500px;
+	font-size: 11px;
+	width: 680px;
 }
 table.schedule td {
 	background-color: lightgrey;
@@ -105,7 +120,43 @@ table.schedule td {
 	border: 1px solid;
 	border-color: grey;
 	text-align: center;
-	width: 600px;
+	font-size: 11px;
+	width: 50px;
+}
+table.enlistcourse {
+	width: 860px;
+}
+table.enlistcourse th {
+	text-align: left;
+	font-size: 11px;
+	width: 120px;
+}
+table.enlistcourse td {
+	text-align: center;
+	font-size: 11px;
+}
+table.searchres {
+	border-collapse: collapse;
+	width: 860px;
+	margin-top: 10px;
+}
+table.searchres th {
+	background-color: grey;
+	color: black;
+	border: 1px solid;
+	border-color: grey;
+	text-align: center;
+	font-size: 14px;
+	width: 680px;
+}
+table.searchres td {
+	background-color: lightgrey;
+	color: black;
+	border: 1px solid;
+	border-color: grey;
+	text-align: center;
+	font-size: 14px;
+	width: 50px;
 }
 #wrapper {
 	min-height: 100%;
@@ -152,6 +203,10 @@ table.schedule td {
 	width: 75%;
 	text-align: center;
 }
+#coursename {
+	width: 95%;
+	text-align: left;
+}
 #clickbtn {
 	width: 40%;
 	color: white;
@@ -159,6 +214,14 @@ table.schedule td {
 	padding: 5px;
 	border: 2px solid;
 	border-radius: 25px;
+}
+#searchcourse {
+	width: 100%;
+	color: white;
+	background: maroon;
+	border: 2px solid;
+	border-radius: 25px;
+	position: center;
 }
 #createacct {
 	text-align: center;
@@ -186,7 +249,7 @@ table.schedule td {
 	border-radius: 0px 6px 6px 0px;
     background: green;
     padding: 20px; 
-    width: 820px;
+    width: 860px;
 	font-family: Helvetica, Arial;
 	font-size: 14px;
 	height: 100%;
@@ -221,6 +284,18 @@ table.schedule td {
 	font-family: Helvetica, Arial;
 	font-size: 14px;
 	background: pink;
+	padding: 5px;
+	border: 1px solid;
+	border-color: red;
+	margin: 10px auto;
+	width: 75%;
+}
+#successmsg {
+	text-align: center;
+	color: white;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+	background: green;
 	padding: 5px;
 	border: 1px solid;
 	border-color: red;

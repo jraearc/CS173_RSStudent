@@ -56,10 +56,12 @@
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>
 		<?php 
-		if(isset($_GET["action"]) == "logout") {
-			session_unset();
-			session_destroy();
-			header("location: login.php");
+		if(isset($_GET["action"])) {
+			if(!strcmp($_GET["action"],"logout")) {
+				session_unset();
+				session_destroy();
+				header("location: login.php");
+			}
 		}
 		?>
 		</div>

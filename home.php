@@ -72,9 +72,17 @@
 							<?php echo "<td>$studentnumber</td>" ?>
 						</tr>
 						<tr>
+							<th>Degree Program:</th>
+							<?php echo "<td>$degreeprog</td>" ?>
+						</tr>
+						<tr>
+							<th>College:</th>
+							<?php echo "<td>$college</td>" ?>
+						</tr>
+						<tr>
 							<th>Registration Status:</th>
 							<?php
-							if($is_student == 1) echo "<td>Enrolled</td>";
+							if($is_enrolled == 1) echo "<td>Enrolled</td>";
 							else echo "<td>Not Enrolled</td>"; ?>
 						</tr>
 						<tr>
@@ -90,14 +98,6 @@
 							else if(!strcmp($bracket, "D")) echo "<td>Partial Discount - 80%</td>";
 							else if(!strcmp($bracket, "E")) echo "<td>Full Discount</td>"; ?>
 						</tr>
-						<tr>
-							<th>Scholarships:</th>
-							<td>None</td>
-						</tr>
-						<tr>
-							<th>Grade Notifications:</th>
-							<td>None</td>
-						</tr>
 					</table>
 				</div>
 			</article>
@@ -106,10 +106,12 @@
 			Copyright (c) 2016 CS173 Productions. All rights reserved.
 		</div>
 		<?php 
-		if(isset($_GET["action"]) == "logout") {
-			session_unset();
-			session_destroy();
-			header("location: login.php");
+		if(isset($_GET["action"])) {
+			if(!strcmp($_GET["action"],"logout")) {
+				session_unset();
+				session_destroy();
+				header("location: login.php");
+			}
 		}
 		?>
 	</div>
